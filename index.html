@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CID Bureau - Full Team HQ</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            border: 5px solid #222;
+        }
+
+        #bureau-interface {
+            display: none; 
+            width: 95%;
+            max-width: 1200px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-text {
+            opacity: 0;
+        }
+
+        .show-now {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .main-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .side-profile {
+            text-align: center;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.05);
+            width: 180px;
+        }
+
+        #acp-focus {
+            text-align: center;
+            border: 3px solid #00ff00;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 30px #00ff00;
+            width: 350px;
+        }
+
+        .experts-wing {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            border-top: 2px solid #333;
+            padding-top: 20px;
+        }
+
+        .expert-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* NEW: Added cursor pointer and hover effect for images */
+        img {
+            border: 2px solid #fff;
+            background: #222;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            border-color: #ff0000;
+        }
+
+        .img-large { width: 220px; height: 250px; object-fit: cover; }
+        .img-medium { width: 140px; height: 160px; object-fit: cover; }
+        .img-small { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: #cc0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 15px #ff0000;
+            letter-spacing: 2px;
+        }
+
+        button:hover { background: #ff0000; transform: scale(1.05); }
+
+        .typing-text {
+            font-size: 14px;
+            color: #00ff00;
+            margin-top: 10px;
+        }
+
+        h1, h2, h3 { margin: 5px 0; letter-spacing: 1px; }
+        .catchphrase { color: white; font-style: italic; margin-top: 10px; }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.5s; }
+        .delay-3 { animation-delay: 0.8s; }
+        .delay-4 { animation-delay: 1.1s; }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen">
+        <button onclick="startMission()">ACCESS CID MAINFRANE</button>
+    </div>
+
+    <div id="bureau-interface">
+        <div class="main-row">
+            <div class="side-profile animate-text delay-1">
+                <h3>INSPECTOR DURE</h3>
+                <img src="dure.png" alt="Durai" class="img-medium" onclick="toggleMusic()">
+                <p class="typing-text">> FIELD AGENT</p>
+            </div>
+
+            <div id="acp-focus" class="animate-text delay-2">
+                <h1>ACP PURUSHOTAM</h1>
+                <img src="purushotam.png" alt="ACP Purushotam" class="img-large" onclick="toggleMusic()">
+                <div class="typing-text">
+                    <p>> LEAD INVESTIGATOR</p>
+                    <p>> STATUS: ACTIVE</p>
+                </div>
+                <h2 class="catchphrase">"Kuch toh gadbad hai!"</h2>
+            </div>
+
+            <div class="side-profile animate-text delay-1">
+                <h3>INSPECTOR PARAJEET</h3>
+                <img src="parajeet.png" alt="Parajeet" class="img-medium" onclick="toggleMusic()">
+                <p class="typing-text">> FIELD AGENT</p>
+            </div>
+        </div>
+
+        <div class="experts-wing">
+            <div class="expert-card animate-text delay-3">
+                <img src="surendra.png" alt="Dr Surendra" class="img-small" onclick="toggleMusic()">
+                <div>
+                    <h3>DR. SURENDRA</h3>
+                    <p class="typing-text">FORENSIC EXPERT</p>
+                </div>
+            </div>
+
+            <div class="expert-card animate-text delay-4">
+                <img src="taradevi.jpg" alt="Miss Taradevi" class="img-small" onclick="toggleMusic()">
+                <div>
+                    <h3>MISS TARADEVI</h3>
+                    <p class="typing-text">CYBER ANALYST</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="cidMusic" src="videoplayback.m4a"></audio>
+
+    <script>
+        var audio = document.getElementById("cidMusic");
+
+        function startMission() {
+            document.getElementById('start-screen').style.display = 'none';
+            const interface = document.getElementById('bureau-interface');
+            interface.style.display = 'block';
+            
+            const elements = document.querySelectorAll('.animate-text');
+            elements.forEach(el => {
+                el.classList.add('show-now');
+            });
+            
+            audio.play();
+        }
+
+        // NEW: Function to stop/start music when any photo is clicked
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+    </script>
+</body>
+</html>
